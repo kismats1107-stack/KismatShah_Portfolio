@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { Terminal, Cpu, Code2, Globe, Wrench, Sparkles } from 'lucide-react';
 import FadeIn from './FadeIn';
+import ShinyText from './reactbits/ShinyText';
+import CountUp from './reactbits/CountUp';
+import SpotlightCard from './reactbits/SpotlightCard';
+import ClickSpark from './reactbits/ClickSpark';
 import { SKILL_CATEGORIES, type Skill } from '../data/skills';
 
 const ALL_SKILLS = SKILL_CATEGORIES.flatMap((c) => c.skills);
@@ -39,7 +43,7 @@ export default function SkillsSection() {
 
             <FadeIn delay={0.08} y={20}>
               <h2 className="font-condensed text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase tracking-tight text-white leading-none">
-                Core Stack &amp; <span className="animate-shiny">Capabilities</span>
+                Core Stack &amp; <ShinyText text="Capabilities" color="#ffffff" shineColor="#ff2233" speed={4} />
               </h2>
             </FadeIn>
 
@@ -63,19 +67,20 @@ export default function SkillsSection() {
                 const Icon = tab.icon;
                 const isActive = selectedCatId === tab.id;
                 return (
-                  <button
-                    type="button"
-                    key={tab.id}
-                    onClick={() => setSelectedCatId(tab.id)}
-                    className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
-                      isActive
-                        ? 'bg-[#d92238] text-white shadow-[0_0_18px_rgba(217,34,56,0.6)]'
-                        : 'bg-white/[0.04] text-white/60 border border-white/10 hover:text-white hover:bg-white/[0.08]'
-                    }`}
-                  >
-                    <Icon size={13} />
-                    <span>{tab.label}</span>
-                  </button>
+                  <ClickSpark key={tab.id} sparkColor="#d92238" className="inline-block">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedCatId(tab.id)}
+                      className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                        isActive
+                          ? 'bg-[#d92238] text-white shadow-[0_0_18px_rgba(217,34,56,0.6)]'
+                          : 'bg-white/[0.04] text-white/60 border border-white/10 hover:text-white hover:bg-white/[0.08]'
+                      }`}
+                    >
+                      <Icon size={13} />
+                      <span>{tab.label}</span>
+                    </button>
+                  </ClickSpark>
                 );
               })}
             </div>
@@ -173,9 +178,10 @@ export default function SkillsSection() {
                 const Icon = skill.icon;
                 const isCurrent = activeSkill.name === skill.name;
                 return (
-                  <div
+                  <SpotlightCard
                     key={skill.name}
                     onClick={() => setActiveSkill(skill)}
+                    spotlightColor="rgba(217, 34, 56, 0.25)"
                     className={`liquid-glass rounded-2xl p-4 cursor-pointer transition-all duration-300 group ${
                       isCurrent
                         ? 'border-[#d92238]/70 shadow-[0_0_25px_rgba(217,34,56,0.3)] bg-white/[0.04]'
@@ -221,7 +227,7 @@ export default function SkillsSection() {
                         }}
                       />
                     </div>
-                  </div>
+                  </SpotlightCard>
                 );
               })}
             </div>
@@ -231,14 +237,15 @@ export default function SkillsSection() {
         {/* ── Bottom Metrics Strip ── */}
         <FadeIn delay={0.4} y={15} className="mt-14 pt-8 border-t border-white/5 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {[
-            { val: '6+', label: 'Languages' },
-            { val: '12+', label: 'Frameworks & Tools' },
-            { val: '5+', label: 'Hardware Controllers' },
-            { val: '100%', label: 'Hands-On Code' },
+            { to: 6, suffix: '+', label: 'Languages' },
+            { to: 12, suffix: '+', label: 'Frameworks & Tools' },
+            { to: 5, suffix: '+', label: 'Hardware Controllers' },
+            { to: 100, suffix: '%', label: 'Hands-On Code' },
           ].map((item, idx) => (
             <div key={idx} className="flex flex-col">
               <span className="font-condensed text-3xl sm:text-4xl font-extrabold text-white">
-                {item.val}
+                <CountUp to={item.to} duration={1.5} />
+                {item.suffix}
               </span>
               <span className="text-xs uppercase font-mono tracking-wider text-white/50">
                 {item.label}

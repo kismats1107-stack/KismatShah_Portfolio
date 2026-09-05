@@ -1,5 +1,11 @@
-﻿import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
+// Deliberately NOT using reactbits/GlowCursor (WebGL) here: measured on a
+// software-rendered GPU it dropped the page from 60fps to ~1.3fps (a
+// fullscreen fragment shader looping 64 trail points per pixel is trivial on
+// real GPU hardware but serializes badly without one — a real risk on older
+// laptops, some corporate machines, and VMs). This CSS-transform glow is
+// visually close and effectively free either way.
 export default function FluidCursor() {
   const spotlightRef = useRef<HTMLDivElement>(null);
   const coreRef = useRef<HTMLDivElement>(null);

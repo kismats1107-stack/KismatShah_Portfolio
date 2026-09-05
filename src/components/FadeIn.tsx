@@ -4,10 +4,10 @@ import type { CSSProperties, ReactNode } from 'react';
 interface FadeInProps {
   children: ReactNode;
   delay?: number;
-  duration?: number;
+  direction?: 'up' | 'down' | 'left' | 'right';
   x?: number;
   y?: number;
-  as?: string;
+  duration?: number;
   className?: string;
   style?: CSSProperties;
 }
@@ -17,9 +17,9 @@ const EASE: Easing = [0.25, 0.1, 0.25, 1];
 export default function FadeIn({
   children,
   delay = 0,
-  duration = 0.7,
   x = 0,
-  y = 30,
+  y = 20,
+  duration = 0.6,
   className,
   style,
 }: FadeInProps) {
@@ -29,11 +29,10 @@ export default function FadeIn({
       style={style}
       initial={{ opacity: 0, x, y }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: '50px', amount: 0 }}
+      viewport={{ once: true, margin: '-20px', amount: 0 }}
       transition={{ delay, duration, ease: EASE }}
     >
       {children}
     </motion.div>
   );
 }
-

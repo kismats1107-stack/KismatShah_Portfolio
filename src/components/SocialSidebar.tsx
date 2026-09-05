@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub, FaLinkedinIn, FaInstagram, FaPhoneAlt } from 'react-icons/fa';
+import GlareHover from './reactbits/GlareHover';
 
 interface SocialItem {
   id: string;
@@ -114,22 +115,33 @@ export default function SocialSidebar() {
               onMouseEnter={() => setHoveredId(s.id)}
               onMouseLeave={() => setHoveredId(null)}
             >
-              <motion.a
-                href={s.href}
-                target={s.href.startsWith('http') ? '_blank' : undefined}
-                rel="noopener noreferrer"
-                aria-label={s.label}
-                whileHover={{ scale: 1.25, x: 2 }}
-                whileTap={{ scale: 0.92 }}
-                transition={{ type: 'spring', stiffness: 320, damping: 15 }}
-                className="text-[#72728f] hover:text-white transition-colors duration-200 text-lg sm:text-xl p-2 rounded-xl hover:bg-white/10 cursor-pointer"
-                style={{
-                  color: isHovered ? s.color : undefined,
-                  boxShadow: isHovered ? `0 0 18px ${s.glowColor}` : undefined,
-                }}
+              <GlareHover
+                width="auto"
+                height="auto"
+                background="transparent"
+                borderRadius="0.75rem"
+                borderColor="transparent"
+                glareColor={s.color}
+                glareOpacity={0.35}
+                className="!inline-block"
               >
-                <Icon />
-              </motion.a>
+                <motion.a
+                  href={s.href}
+                  target={s.href.startsWith('http') ? '_blank' : undefined}
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  whileHover={{ scale: 1.25, x: 2 }}
+                  whileTap={{ scale: 0.92 }}
+                  transition={{ type: 'spring', stiffness: 320, damping: 15 }}
+                  className="block text-[#72728f] hover:text-white transition-colors duration-200 text-lg sm:text-xl p-2 rounded-xl hover:bg-white/10 cursor-pointer"
+                  style={{
+                    color: isHovered ? s.color : undefined,
+                    boxShadow: isHovered ? `0 0 18px ${s.glowColor}` : undefined,
+                  }}
+                >
+                  <Icon />
+                </motion.a>
+              </GlareHover>
 
               {/* Floating Quote Card */}
               <AnimatePresence>

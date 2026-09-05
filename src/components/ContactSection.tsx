@@ -12,6 +12,10 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import FadeIn from './FadeIn';
+import ShinyText from './reactbits/ShinyText';
+import GlareHover from './reactbits/GlareHover';
+import ClickSpark from './reactbits/ClickSpark';
+import ElectricBorder from './reactbits/ElectricBorder';
 
 import { sendEmailSignal } from '../services/emailService';
 
@@ -86,7 +90,7 @@ export default function ContactSection() {
 
             <FadeIn delay={0.08} y={20}>
               <h2 className="font-condensed text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase tracking-tight text-white leading-none">
-                Let&apos;s Connect &amp; <span className="animate-shiny">Build</span>
+                Let&apos;s Connect &amp; <ShinyText text="Build" color="#ffffff" shineColor="#ff2233" speed={4} />
               </h2>
             </FadeIn>
 
@@ -115,6 +119,7 @@ export default function ContactSection() {
               </div>
 
               {/* College Email */}
+              <GlareHover width="100%" height="auto" background="transparent" borderRadius="1rem" borderColor="transparent" glareColor="#d92238" glareOpacity={0.3} className="!block">
               <div className="bg-white/[0.03] border border-white/5 p-4 rounded-2xl flex items-center justify-between gap-3 group hover:border-[#d92238]/40 transition-colors">
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="w-9 h-9 rounded-xl bg-[#d92238]/10 text-[#d92238] border border-[#d92238]/30 flex items-center justify-center shrink-0">
@@ -142,8 +147,10 @@ export default function ContactSection() {
                   {copiedKey === 'col_mail' ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
                 </button>
               </div>
+              </GlareHover>
 
               {/* Personal Email */}
+              <GlareHover width="100%" height="auto" background="transparent" borderRadius="1rem" borderColor="transparent" glareColor="#d92238" glareOpacity={0.3} className="!block">
               <div className="bg-white/[0.03] border border-white/5 p-4 rounded-2xl flex items-center justify-between gap-3 group hover:border-[#d92238]/40 transition-colors">
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="w-9 h-9 rounded-xl bg-white/5 text-white/80 border border-white/10 flex items-center justify-center shrink-0">
@@ -171,8 +178,10 @@ export default function ContactSection() {
                   {copiedKey === 'per_mail' ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
                 </button>
               </div>
+              </GlareHover>
 
               {/* Phone / WhatsApp */}
+              <GlareHover width="100%" height="auto" background="transparent" borderRadius="1rem" borderColor="transparent" glareColor="#d92238" glareOpacity={0.3} className="!block">
               <div className="bg-white/[0.03] border border-white/5 p-4 rounded-2xl flex items-center justify-between gap-3 group hover:border-[#d92238]/40 transition-colors">
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="w-9 h-9 rounded-xl bg-white/5 text-white/80 border border-white/10 flex items-center justify-center shrink-0">
@@ -200,6 +209,7 @@ export default function ContactSection() {
                   {copiedKey === 'phone' ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
                 </button>
               </div>
+              </GlareHover>
 
               {/* Location & Resume Strip */}
               <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
@@ -224,6 +234,7 @@ export default function ContactSection() {
           {/* Right Column: Quick Dispatch & Featured Repositories (6 cols) */}
           <FadeIn delay={0.3} y={20} className="lg:col-span-6 flex flex-col gap-4">
             {/* Quick Dispatch Form */}
+            <ElectricBorder color="#d92238" speed={0.6} chaos={0.06} borderRadius={24}>
             <div className="liquid-glass rounded-3xl p-6 sm:p-8 border border-white/10">
               <span className="text-xs font-mono uppercase tracking-wider text-white/50 block mb-4 flex items-center gap-1.5">
                 <Sparkles size={13} className="text-[#d92238]" />
@@ -259,10 +270,11 @@ export default function ContactSection() {
                   className="bg-white/[0.04] border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-[#d92238]/60 transition-colors resize-none"
                 />
 
+                <ClickSpark sparkColor="#d92238" className="inline-block mt-1">
                 <button
                   type="submit"
                   disabled={sentStatus === 'sending'}
-                  className={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer mt-1 ${
+                  className={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-2.5 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                     sentStatus === 'success'
                       ? 'bg-emerald-500 text-white shadow-[0_0_20px_rgba(16,185,129,0.5)]'
                       : sentStatus === 'error'
@@ -293,8 +305,10 @@ export default function ContactSection() {
                     </>
                   )}
                 </button>
+                </ClickSpark>
               </form>
             </div>
+            </ElectricBorder>
 
             {/* Featured Repos Mini-List */}
             <div className="liquid-glass rounded-3xl p-5 border border-white/10">

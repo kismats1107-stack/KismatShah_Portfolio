@@ -9,6 +9,8 @@ import {
   Compass,
 } from 'lucide-react';
 import FadeIn from './FadeIn';
+import ShinyText from './reactbits/ShinyText';
+import SpotlightCard from './reactbits/SpotlightCard';
 
 const ACHIEVEMENTS = [
   {
@@ -69,7 +71,7 @@ export default function AchievementsSection() {
 
             <FadeIn delay={0.08} y={20}>
               <h2 className="font-condensed text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase tracking-tight text-white leading-none">
-                Milestones &amp; <span className="animate-shiny">Credentials</span>
+                Milestones &amp; <ShinyText text="Credentials" color="#ffffff" shineColor="#fbbf24" speed={4} />
               </h2>
             </FadeIn>
 
@@ -87,7 +89,10 @@ export default function AchievementsSection() {
             const Icon = item.icon;
             return (
               <FadeIn key={item.title} delay={0.1 + idx * 0.08} y={20}>
-                <div className="liquid-glass rounded-3xl p-6 sm:p-7 border border-white/10 flex flex-col justify-between group hover:border-[#fbbf24]/50 hover:shadow-[0_20px_50px_rgba(251,191,36,0.15)] transition-all duration-300">
+                <SpotlightCard
+                  spotlightColor="rgba(251, 191, 36, 0.22)"
+                  className="liquid-glass rounded-3xl p-6 sm:p-7 border border-white/10 flex flex-col justify-between group hover:border-[#fbbf24]/50 hover:shadow-[0_20px_50px_rgba(251,191,36,0.15)] transition-all duration-300"
+                >
                   <div>
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-2.5">
@@ -133,7 +138,7 @@ export default function AchievementsSection() {
                     </span>
                     <span className="text-[#fbbf24] font-bold">2024 &ndash; 2025</span>
                   </div>
-                </div>
+                </SpotlightCard>
               </FadeIn>
             );
           })}

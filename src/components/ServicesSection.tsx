@@ -10,6 +10,9 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import FadeIn from './FadeIn';
+import ShinyText from './reactbits/ShinyText';
+import GlareHover from './reactbits/GlareHover';
+import ElectricBorder from './reactbits/ElectricBorder';
 
 interface LabModule {
   id: string;
@@ -123,7 +126,7 @@ export default function ServicesSection() {
 
             <FadeIn delay={0.08} y={20}>
               <h2 className="font-condensed text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase tracking-tight text-white leading-none">
-                Engineering <span className="animate-shiny">Workbench</span>
+                Engineering <ShinyText text="Workbench" color="#ffffff" shineColor="#ff2233" speed={4} />
               </h2>
             </FadeIn>
 
@@ -144,9 +147,19 @@ export default function ServicesSection() {
               const Icon = module.icon;
               const isSelected = activeModule.id === module.id;
               return (
+                <GlareHover
+                  key={module.id}
+                  width="100%"
+                  height="auto"
+                  background="transparent"
+                  borderRadius="1rem"
+                  borderColor="transparent"
+                  glareColor={module.color}
+                  glareOpacity={0.3}
+                  className="!block"
+                >
                 <button
                   type="button"
-                  key={module.id}
                   onClick={() => setActiveModule(module)}
                   className={`liquid-glass rounded-2xl p-4 text-left transition-all duration-300 w-full group cursor-pointer ${
                     isSelected
@@ -186,12 +199,14 @@ export default function ServicesSection() {
                     </span>
                   </div>
                 </button>
+                </GlareHover>
               );
             })}
           </FadeIn>
 
           {/* Right Column: Interactive macOS Telemetry Deck (8 cols) */}
           <FadeIn delay={0.3} y={20} className="lg:col-span-8">
+            <ElectricBorder color={activeModule.color} speed={0.7} chaos={0.08} borderRadius={24}>
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeModule.id}
@@ -311,6 +326,7 @@ export default function ServicesSection() {
                 </div>
               </motion.div>
             </AnimatePresence>
+            </ElectricBorder>
           </FadeIn>
         </div>
 

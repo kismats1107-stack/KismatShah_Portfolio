@@ -11,6 +11,9 @@ import {
 } from 'lucide-react';
 import FadeIn from './FadeIn';
 import HackathonDetail from './HackathonDetail';
+import ShinyText from './reactbits/ShinyText';
+import ClickSpark from './reactbits/ClickSpark';
+import SpotlightCard from './reactbits/SpotlightCard';
 
 interface Project {
   id: string;
@@ -141,7 +144,7 @@ export default function ProjectsSection() {
 
             <FadeIn delay={0.08} y={20}>
               <h2 className="font-condensed text-4xl sm:text-5xl md:text-6xl font-extrabold uppercase tracking-tight text-white leading-none">
-                Engineered <span className="animate-shiny">Projects</span>
+                Engineered <ShinyText text="Projects" color="#ffffff" shineColor="#ff2233" speed={4} />
               </h2>
             </FadeIn>
 
@@ -164,18 +167,19 @@ export default function ProjectsSection() {
               ].map((tab) => {
                 const isActive = selectedCategory === tab.id;
                 return (
-                  <button
-                    type="button"
-                    key={tab.id}
-                    onClick={() => setSelectedCategory(tab.id)}
-                    className={`rounded-full px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
-                      isActive
-                        ? 'bg-[#d92238] text-white shadow-[0_0_18px_rgba(217,34,56,0.6)]'
-                        : 'bg-white/[0.04] text-white/60 border border-white/10 hover:text-white hover:bg-white/[0.08]'
-                    }`}
-                  >
-                    {tab.label}
-                  </button>
+                  <ClickSpark key={tab.id} sparkColor="#d92238" className="inline-block">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedCategory(tab.id)}
+                      className={`rounded-full px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                        isActive
+                          ? 'bg-[#d92238] text-white shadow-[0_0_18px_rgba(217,34,56,0.6)]'
+                          : 'bg-white/[0.04] text-white/60 border border-white/10 hover:text-white hover:bg-white/[0.08]'
+                      }`}
+                    >
+                      {tab.label}
+                    </button>
+                  </ClickSpark>
                 );
               })}
             </div>
@@ -188,8 +192,11 @@ export default function ProjectsSection() {
             const Icon = project.icon;
             return (
               <FadeIn key={project.id} delay={0.1 + idx * 0.08} y={20}>
-                <div className="liquid-glass rounded-3xl p-6 border border-white/10 flex flex-col justify-between h-full group hover:border-[#d92238]/60 hover:shadow-[0_20px_50px_rgba(217,34,56,0.2)] transition-all duration-500">
-                  
+                <SpotlightCard
+                  spotlightColor="rgba(217, 34, 56, 0.25)"
+                  className="liquid-glass rounded-3xl p-6 border border-white/10 flex flex-col justify-between h-full group hover:border-[#d92238]/60 hover:shadow-[0_20px_50px_rgba(217,34,56,0.2)] transition-all duration-500"
+                >
+
                   {/* Card Header */}
                   <div>
                     <div className="flex items-center justify-between mb-4">
@@ -267,7 +274,7 @@ export default function ProjectsSection() {
                     </div>
                   </div>
 
-                </div>
+                </SpotlightCard>
               </FadeIn>
             );
           })}

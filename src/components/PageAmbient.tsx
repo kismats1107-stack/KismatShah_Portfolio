@@ -1,4 +1,13 @@
+import { useEffect, useState } from 'react';
+import DotGrid from './reactbits/DotGrid';
+
 export default function PageAmbient() {
+  const [interactive, setInteractive] = useState(true);
+
+  useEffect(() => {
+    setInteractive(!window.matchMedia('(pointer: coarse)').matches);
+  }, []);
+
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none -z-20">
       {/* Subtle Studio Crimson Ambient Glow */}
@@ -11,13 +20,19 @@ export default function PageAmbient() {
         style={{ background: 'radial-gradient(circle, rgba(140, 15, 30, 0.35), transparent 70%)', filter: 'blur(90px)' }}
       />
 
-      {/* Subtle Dot Grid */}
-      <svg className="absolute inset-0 w-full h-full opacity-[0.03]" aria-hidden="true">
-        <pattern id="pageDots" x="0" y="0" width="36" height="36" patternUnits="userSpaceOnUse">
-          <circle cx="2" cy="2" r="1.2" fill="#ffffff" />
-        </pattern>
-        <rect width="100%" height="100%" fill="url(#pageDots)" />
-      </svg>
+      {/* Subtle Reactive Dot Grid */}
+      {interactive && (
+        <DotGrid
+          className="opacity-[0.12] pointer-events-none"
+          dotSize={2.5}
+          gap={26}
+          baseColor="#3a1218"
+          activeColor="#d92238"
+          proximity={140}
+          shockRadius={200}
+          shockStrength={3}
+        />
+      )}
     </div>
   );
 }
